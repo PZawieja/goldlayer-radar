@@ -19,6 +19,8 @@ Scored output goes only to a private Notion database. This repo holds raw public
 ```bash
 uv sync
 uv run python -m radar.bootstrap
+# dbt/profiles.yml is gitignored; CI writes it. Locally: a duckdb profile named
+# `radar` with path ../data/radar.duckdb (see .github/workflows/score-weekly.yml)
 uv run python -m radar.collect
 cd dbt && uv run dbt build --profiles-dir . && cd ..
 uv run python -m radar.classify --sync --limit 20   # needs ANTHROPIC_API_KEY
