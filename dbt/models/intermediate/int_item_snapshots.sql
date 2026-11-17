@@ -92,6 +92,54 @@ WITH unioned AS (
         , published_at
         , matched_keywords
     FROM {{ ref('stg_rss__entries') }}
+
+    UNION ALL
+
+    SELECT
+        item_id
+        , 'discourse' AS source
+        , snapshot_date
+        , title
+        , excerpt AS body
+        , url
+        , 'secondary' AS source_kind
+        , views + 10 * like_count AS engagement
+        , posts_count AS comments
+        , published_at
+        , CAST([] AS VARCHAR []) AS matched_keywords
+    FROM {{ ref('stg_discourse__topics') }}
+
+    UNION ALL
+
+    SELECT
+        item_id
+        , 'devto' AS source
+        , snapshot_date
+        , title
+        , description AS body
+        , url
+        , 'secondary' AS source_kind
+        , reactions AS engagement
+        , comments
+        , published_at
+        , matched_keywords
+    FROM {{ ref('stg_devto__articles') }}
+
+    UNION ALL
+
+    SELECT
+        item_id
+        , 'lobsters' AS source
+        , snapshot_date
+        , title
+        , NULL AS body
+        , url
+        , 'secondary' AS source_kind
+        , score AS engagement
+        , comment_count AS comments
+        , published_at
+        , matched_keywords
+    FROM {{ ref('stg_lobsters__stories') }}
 )
 
 SELECT

@@ -62,3 +62,18 @@ models:
         tests: [not_null, unique]
       - name: cluster_key
         tests: [not_null]
+  - name: stg_discourse__topics
+    description: Top daily/weekly topics from community Discourse forums (dbt Community).
+    columns:
+      - name: item_id
+        tests: [not_null]
+  - name: stg_devto__articles
+    description: Top weekly DEV.to articles for data tags.
+    columns:
+      - name: item_id
+        tests: [not_null]
+  - name: stg_lobsters__stories
+    description: Lobsters stories from data-related tags.
+    columns:
+      - name: item_id
+        tests: [not_null]

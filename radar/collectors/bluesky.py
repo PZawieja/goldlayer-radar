@@ -1,6 +1,6 @@
 import pyarrow as pa
 
-from radar.common import config, http, log, matched_keywords, now_utc
+from radar.common import config, data_keywords, http, log, matched_keywords, now_utc
 
 SCHEMA = pa.schema(
     [
@@ -37,6 +37,8 @@ def collect() -> list[dict]:
                 if (post.get("likeCount") or 0) < cfg["min_likes"]:
                     continue
                 rec = post["record"]
+                if not data_keywords(rec.get("text", "")):
+                    continue
                 handle = post["author"]["handle"]
                 rkey = post["uri"].rsplit("/", 1)[-1]
                 seen[post["uri"]] = {

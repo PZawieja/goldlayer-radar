@@ -10,7 +10,7 @@ models:
         tests:
           - accepted_values:
               arguments:
-                values: [hn, reddit, github, hf_papers, bluesky, rss]
+                values: [hn, reddit, github, hf_papers, bluesky, rss, discourse, devto, lobsters]
   - name: int_items
     description: One row per item with latest attributes, velocity and within-source engagement percentile.
     columns:

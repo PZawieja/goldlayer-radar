@@ -25,6 +25,15 @@ sources:
       - name: rss
         meta:
           external_location: "read_parquet('../data/raw/*/rss.parquet', filename = true, union_by_name = true)"
+      - name: discourse
+        meta:
+          external_location: "read_parquet('../data/raw/*/discourse.parquet', filename = true, union_by_name = true)"
+      - name: devto
+        meta:
+          external_location: "read_parquet('../data/raw/*/devto.parquet', filename = true, union_by_name = true)"
+      - name: lobsters
+        meta:
+          external_location: "read_parquet('../data/raw/*/lobsters.parquet', filename = true, union_by_name = true)"
   - name: llm
     description: LLM outputs written by radar/classify.py and radar/cluster.py.
     tables:

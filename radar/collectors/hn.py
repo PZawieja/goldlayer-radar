@@ -2,7 +2,7 @@ from datetime import timedelta
 
 import pyarrow as pa
 
-from radar.common import config, http, log, matched_keywords, now_utc
+from radar.common import config, data_keywords, http, log, matched_keywords, now_utc
 
 SCHEMA = pa.schema(
     [
@@ -24,7 +24,7 @@ def collect() -> list[dict]:
     since = int((now_utc() - timedelta(hours=cfg["lookback_hours"])).timestamp())
     seen: dict[str, dict] = {}
     with http() as client:
-        for kw in config("sources")["keywords"]:
+        for kw in config("sources")["data_keywords"]:
             resp = client.get(
                 "https://hn.algolia.com/api/v1/search_by_date",
                 params={
@@ -38,9 +38,10 @@ def collect() -> list[dict]:
                 log.warning("hn %s: HTTP %s", kw, resp.status_code)
                 continue
             for hit in resp.json()["hits"]:
-                kws = matched_keywords(hit.get("title", ""))
-                if not kws:
+                title = hit.get("title", "")
+                if not data_keywords(title):
                     continue
+                kws = matched_keywords(title)
                 seen[hit["objectID"]] = {
                     "object_id": hit["objectID"],
                     "title": hit.get("title"),

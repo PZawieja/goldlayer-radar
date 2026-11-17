@@ -8,7 +8,7 @@ import feedparser
 import httpx
 import pyarrow as pa
 
-from radar.common import config, http, log, matched_keywords, now_utc
+from radar.common import config, data_keywords, http, log, matched_keywords, now_utc
 
 SCHEMA = pa.schema(
     [
@@ -47,6 +47,10 @@ def collect() -> list[dict]:
             for e in parsed.entries:
                 published = _published(e)
                 if published and published < cutoff:
+                    continue
+                if feed.get("require_data_keyword") and not data_keywords(
+                    f"{e.get('title', '')} {e.get('summary', '')}"
+                ):
                     continue
                 link = e.get("link", "")
                 raw = re.sub(r"<[^>]+>", " ", e.get("summary") or "")

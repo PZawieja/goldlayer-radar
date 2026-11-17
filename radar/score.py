@@ -69,10 +69,17 @@ def candidates(week: date, n: int) -> list[dict]:
         """
         SELECT * FROM fct_topic_weekly_scores
         WHERE week_start = ?
+          AND NOT list_contains(?, category)
+          AND NOT list_contains(?, COALESCE(primary_tag, 'none'))
         ORDER BY momentum_norm * 25 + spread_norm * 15 DESC, items DESC
         LIMIT ?
         """,
-        params=[week, n],
+        params=[
+            week,
+            config("scoring")["excluded_categories"],
+            config("scoring")["excluded_tags"],
+            n,
+        ],
     )
     cols = [d[0] for d in cur.description]
     return [dict(zip(cols, r, strict=True)) for r in cur.fetchall()]

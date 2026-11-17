@@ -7,6 +7,8 @@ weights:
   durability: 10
 
 top_clusters_to_score: 25
+excluded_categories: [other]
+excluded_tags: [none]
 min_cluster_items: 1
 covered_penalty: 0.5
 no_primary_source_verdict_cap: Watch

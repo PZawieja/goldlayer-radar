@@ -8,7 +8,7 @@ weekly  dbt (int_items) ─► classify.py (Haiku, Batches) ─► cluster.py (S
         ─► dbt (fct_topic_weekly_scores) ─► score.py (Sonnet) ─► notion_sync.py
 ```
 
-**Sources:** Hacker News, Reddit, GitHub (new repos and star velocity), PyPI downloads, Hugging Face daily papers, Bluesky, vendor and expert RSS feeds.
+**Sources:** vendor and expert RSS (dbt, Snowflake, BigQuery, Databricks, DuckDB, SELECT, Monte Carlo, Medium tags), dbt Community Discourse, DEV.to, GitHub (data-focused repo searches with star velocity), Hacker News, Lobsters, Bluesky, Hugging Face papers, PyPI downloads, and Reddit once API access is granted. Every item must mention a data/SQL/warehouse term; generic AI news is filtered out at collection.
 
 **Score (0–100):** momentum 25 · cross-source spread 15 · audience relevance 20 · practical applicability 20 · coverage gap 10 · durability 10. The first two come from dbt; the rest are judged by an LLM against the site's [post-writing guide](https://github.com/PZawieja/piotr-zawieja-site/blob/main/POST_WRITING_GUIDE.md). A topic with no primary source (docs, release notes, paper, repo) cannot get "Write now".
 

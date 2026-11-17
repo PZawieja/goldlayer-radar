@@ -1,50 +1,71 @@
-keywords:
+data_keywords:
   - dbt
   - duckdb
   - motherduck
   - snowflake
+  - snowpark
+  - cortex
   - databricks
+  - genie
   - bigquery
+  - redshift
+  - postgres
   - iceberg
   - delta lake
+  - sql
   - data engineering
+  - data engineer
   - analytics engineering
-  - data pipeline
+  - analytics engineer
   - data warehouse
   - lakehouse
+  - data pipeline
+  - etl
+  - elt
+  - data modeling
+  - dimensional model
   - semantic layer
+  - metrics layer
+  - metric definitions
   - data quality
   - data contract
-  - observability
+  - data observability
+  - data catalog
+  - lineage
+  - text-to-sql
+  - analytics agent
+  - data agent
   - sqlmesh
   - dlt
   - polars
   - airflow
   - dagster
-  - text-to-sql
-  - mcp
-  - model context protocol
+  - looker
+  - tableau
+  - power bi
+  - metabase
+  - spreadsheet
+
+ai_keywords:
   - llm
   - llms
-  - ai
-  - agents
-  - coding agent
-  - sql
-  - postgres
-  - embeddings
   - ai agent
+  - agents
   - agentic
+  - mcp
+  - model context protocol
   - rag
   - evals
   - claude
+  - claude code
   - openai
-  - anthropic
   - gemini
-  - vector database
+  - copilot
+  - coding agent
 
 hn:
-  min_points: 20
-  lookback_hours: 48
+  min_points: 5
+  lookback_hours: 72
   hits_per_query: 50
 
 reddit:
@@ -53,26 +74,35 @@ reddit:
     - dbt
     - snowflake
     - analytics
-    - LocalLLaMA
+    - SQL
+    - BusinessIntelligence
     - ClaudeAI
-    - MachineLearning
+  gated_subreddits:
+    - ClaudeAI
   min_score: 20
   limit: 50
 
 github:
-  topics:
-    - llm
-    - mcp
-    - ai-agents
-    - dbt
-    - duckdb
-    - data-engineering
-    - iceberg
-    - text-to-sql
-    - data-quality
+  queries:
+    - topic:dbt
+    - topic:duckdb
+    - topic:snowflake
+    - topic:text-to-sql
+    - topic:semantic-layer
+    - topic:data-quality
+    - topic:data-engineering
+    - topic:analytics-engineering
+    - topic:iceberg
+    - topic:sql topic:llm
+    - topic:mcp topic:database
+    - topic:mcp snowflake
+    - topic:mcp dbt
+    - topic:mcp bigquery
+    - topic:mcp postgres
+    - topic:ai-agents sql
   created_within_days: 30
-  min_stars: 50
-  per_topic: 30
+  min_stars: 30
+  per_query: 20
 
 pypi:
   packages:
@@ -94,8 +124,8 @@ pypi:
     - pyiceberg
 
 hf_papers:
-  limit: 50
-  min_upvotes: 10
+  limit: 100
+  min_upvotes: 5
 
 bluesky:
   queries:
@@ -105,22 +135,49 @@ bluesky:
     - analytics engineering
     - data engineering
     - semantic layer
-    - mcp server
+    - snowflake data
     - text-to-sql
+    - dbt labs
   limit: 25
   min_likes: 10
 
+discourse:
+  forums:
+    - {name: dbt Community, url: "https://discourse.getdbt.com"}
+
+devto:
+  tags: [dataengineering, dbt, snowflake, sql, analytics, dataquality]
+  top_days: 7
+  per_tag: 30
+  min_reactions: 3
+
+lobsters:
+  tags: [databases]
+  min_score: 3
+
 rss:
+  - {name: dbt Developer Blog, url: "https://docs.getdbt.com/blog/rss.xml", kind: primary}
   - {name: dbt Labs, url: "https://www.getdbt.com/blog/rss.xml", kind: primary}
+  - {name: Analytics Engineering Roundup, url: "https://roundup.getdbt.com/feed", kind: secondary}
+  - {name: Snowflake Blog, url: "https://www.snowflake.com/feed/", kind: primary}
+  - {name: Snowflake Builders, url: "https://medium.com/feed/snowflake", kind: primary}
+  - {name: SELECT, url: "https://select.dev/posts/rss.xml", kind: secondary}
+  - {name: BigQuery release notes, url: "https://cloud.google.com/feeds/bigquery-release-notes.xml", kind: primary}
+  - {name: Databricks, url: "https://www.databricks.com/feed", kind: primary, require_data_keyword: true}
   - {name: DuckDB, url: "https://duckdb.org/feed.xml", kind: primary}
   - {name: MotherDuck, url: "https://motherduck.com/rss.xml", kind: primary}
-  - {name: Snowflake Engineering, url: "https://medium.com/feed/snowflake", kind: primary}
-  - {name: Databricks, url: "https://www.databricks.com/feed", kind: primary}
-  - {name: OpenAI, url: "https://openai.com/news/rss.xml", kind: primary}
-  - {name: Hugging Face, url: "https://huggingface.co/blog/feed.xml", kind: primary}
-  - {name: Simon Willison, url: "https://simonwillison.net/atom/everything/", kind: secondary}
+  - {name: dltHub, url: "https://dlthub.com/blog/rss.xml", kind: primary}
+  - {name: Monte Carlo, url: "https://www.montecarlodata.com/feed/", kind: secondary}
+  - {name: Locally Optimistic, url: "https://locallyoptimistic.com/feed/", kind: secondary}
   - {name: Data Engineering Weekly, url: "https://www.dataengineeringweekly.com/feed", kind: secondary}
+  - {name: Joe Reis, url: "https://joereis.substack.com/feed", kind: secondary}
+  - {name: Ergest Xheblati, url: "https://ergestx.substack.com/feed", kind: secondary}
+  - {name: Modern Data 101, url: "https://moderndata101.substack.com/feed", kind: secondary}
   - {name: Benn Stancil, url: "https://benn.substack.com/feed", kind: secondary}
-  - {name: Latent Space, url: "https://www.latent.space/feed", kind: secondary}
-  - {name: Seattle Data Guy, url: "https://seattledataguy.substack.com/feed", kind: secondary}
-  - {name: Pragmatic Engineer, url: "https://newsletter.pragmaticengineer.com/feed", kind: secondary}
+  - {name: Simon Willison, url: "https://simonwillison.net/atom/everything/", kind: secondary, require_data_keyword: true}
+  - {name: Latent Space, url: "https://www.latent.space/feed", kind: secondary, require_data_keyword: true}
+  - {name: Medium dbt, url: "https://medium.com/feed/tag/dbt", kind: secondary}
+  - {name: Medium analytics engineering, url: "https://medium.com/feed/tag/analytics-engineering", kind: secondary}
+  - {name: Medium Snowflake, url: "https://medium.com/feed/tag/snowflake", kind: secondary, require_data_keyword: true}
+  - {name: Medium text-to-SQL, url: "https://medium.com/feed/tag/text-to-sql", kind: secondary}
+  - {name: Medium data engineering, url: "https://medium.com/feed/tag/data-engineering", kind: secondary, require_data_keyword: true}

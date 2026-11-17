@@ -1,19 +1,19 @@
 categories:
-  agents_mcp: {label: "Agents & MCP", tag: AI}
-  llm_evals: {label: "LLM evals & judges", tag: AI}
-  ai_coding: {label: "AI coding tools for data", tag: AI}
-  text_to_sql: {label: "Text-to-SQL & analytics agents", tag: AI}
-  llm_platform: {label: "Model & platform releases", tag: AI}
+  analytics_agents: {label: "Analytics agents & text-to-SQL", tag: AI}
+  agents_mcp_data: {label: "Agents & MCP for data", tag: AI}
+  agent_evals: {label: "Evals & trust for analytics agents", tag: AI}
+  ai_for_ae: {label: "AI-assisted analytics engineering", tag: AI}
+  ai_data_platforms: {label: "AI in data platforms (Cortex / Genie / BigQuery)", tag: AI}
   semantic_layer: {label: "Semantic layer & metrics", tag: dbt}
   dbt_patterns: {label: "dbt & modeling patterns", tag: dbt}
-  transformation_tools: {label: "Transformation tools (dbt / SQLMesh / dlt)", tag: dbt}
-  orchestration: {label: "Orchestration", tag: new-tag-candidate}
-  lakehouse: {label: "Lakehouse / Iceberg / table formats", tag: new-tag-candidate}
-  duckdb_local: {label: "DuckDB & local-first analytics", tag: new-tag-candidate}
-  warehouse_platform: {label: "Snowflake & cloud warehouses", tag: Snowflake}
+  sql_patterns: {label: "SQL patterns & performance", tag: dbt}
+  transformation_tools: {label: "Transformation & ingestion tools", tag: dbt}
+  snowflake: {label: "Snowflake features & practice", tag: Snowflake}
   warehouse_cost: {label: "Warehouse cost & performance", tag: Snowflake}
-  data_quality: {label: "Data quality / contracts / observability", tag: data-quality}
-  governance: {label: "Governance / lineage / catalogs", tag: data-quality}
+  warehouse_other: {label: "BigQuery / Databricks / DuckDB / lakehouse", tag: new-tag-candidate}
+  data_quality: {label: "Data quality / tests / contracts", tag: data-quality}
+  observability: {label: "Observability / lineage / governance", tag: data-quality}
+  orchestration: {label: "Orchestration & platform ops", tag: new-tag-candidate}
   other: {label: "Other / off-topic", tag: none}
 
 site_tags: [AI, dbt, Snowflake, data-quality]

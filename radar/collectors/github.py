@@ -31,18 +31,18 @@ def collect() -> list[dict]:
         headers["Authorization"] = f"Bearer {token}"
     seen: dict[int, dict] = {}
     with http(**headers) as client:
-        for topic in cfg["topics"]:
+        for query in cfg["queries"]:
             resp = client.get(
                 "https://api.github.com/search/repositories",
                 params={
-                    "q": f"topic:{topic} created:>={since} stars:>={cfg['min_stars']}",
+                    "q": f"{query} created:>={since} stars:>={cfg['min_stars']}",
                     "sort": "stars",
                     "order": "desc",
-                    "per_page": cfg["per_topic"],
+                    "per_page": cfg["per_query"],
                 },
             )
             if resp.status_code != 200:
-                log.warning("github %s: HTTP %s", topic, resp.status_code)
+                log.warning("github %s: HTTP %s", query, resp.status_code)
                 continue
             for r in resp.json()["items"]:
                 seen.setdefault(
@@ -58,7 +58,7 @@ def collect() -> list[dict]:
                         "forks": r["forks_count"],
                         "created_at": r["created_at"],
                         "pushed_at": r["pushed_at"],
-                        "search_topic": topic,
+                        "search_topic": query,
                         "collected_at": now_utc(),
                     },
                 )

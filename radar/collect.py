@@ -7,7 +7,18 @@ import httpx
 
 from radar.common import log, write_parquet
 
-SOURCES = ["hn", "reddit", "github", "pypi", "hf_papers", "bluesky", "rss"]
+SOURCES = [
+    "hn",
+    "reddit",
+    "github",
+    "pypi",
+    "hf_papers",
+    "bluesky",
+    "rss",
+    "discourse",
+    "devto",
+    "lobsters",
+]
 
 
 def main():

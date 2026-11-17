@@ -3,7 +3,7 @@ from datetime import UTC, datetime
 
 import pyarrow as pa
 
-from radar.common import config, http, log, matched_keywords, now_utc
+from radar.common import config, data_keywords, http, log, matched_keywords, now_utc
 
 SCHEMA = pa.schema(
     [
@@ -20,8 +20,6 @@ SCHEMA = pa.schema(
         ("collected_at", pa.timestamp("us", tz="UTC")),
     ]
 )
-
-AI_SUBS = {"localllama", "claudeai", "machinelearning"}
 
 
 def _token() -> str | None:
@@ -46,6 +44,7 @@ def collect() -> list[dict]:
     token = _token()
     base = "https://oauth.reddit.com" if token else "https://www.reddit.com"
     headers = {"Authorization": f"Bearer {token}"} if token else {}
+    gated = {s.lower() for s in cfg.get("gated_subreddits", [])}
     rows = []
     with http(**headers) as client:
         for sub in cfg["subreddits"]:
@@ -60,9 +59,9 @@ def collect() -> list[dict]:
                 if p.get("score", 0) < cfg["min_score"] or p.get("stickied"):
                     continue
                 text = f"{p.get('title', '')} {p.get('selftext', '')[:500]}"
-                kws = matched_keywords(text)
-                if sub.lower() in AI_SUBS and not kws:
+                if sub.lower() in gated and not data_keywords(text):
                     continue
+                kws = matched_keywords(text)
                 rows.append(
                     {
                         "post_id": p["id"],

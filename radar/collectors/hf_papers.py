@@ -1,6 +1,6 @@
 import pyarrow as pa
 
-from radar.common import config, http, log, now_utc
+from radar.common import config, data_keywords, http, log, now_utc
 
 SCHEMA = pa.schema(
     [
@@ -28,7 +28,8 @@ def collect() -> list[dict]:
     for item in resp.json():
         p = item.get("paper", item)
         upvotes = p.get("upvotes") or 0
-        if upvotes < cfg["min_upvotes"]:
+        text = f"{p.get('title') or item.get('title')} {p.get('summary') or ''}"
+        if upvotes < cfg["min_upvotes"] or not data_keywords(text):
             continue
         rows.append(
             {

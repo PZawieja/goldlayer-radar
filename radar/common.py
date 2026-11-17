@@ -29,15 +29,19 @@ def http(**headers: str) -> httpx.Client:
 
 
 @cache
-def _keyword_pattern() -> re.Pattern:
-    words = sorted(config("sources")["keywords"], key=len, reverse=True)
-    return re.compile(
-        r"\b(" + "|".join(re.escape(w) for w in words) + r")\b", re.IGNORECASE
-    )
+def _pattern(kind: str) -> re.Pattern:
+    words = sorted(config("sources")[kind], key=len, reverse=True)
+    alt = "|".join(re.escape(w) for w in words)
+    return re.compile(r"\b(" + alt + r")\b", re.IGNORECASE)
+
+
+def data_keywords(text: str) -> list[str]:
+    return sorted({m.lower() for m in _pattern("data_keywords").findall(text or "")})
 
 
 def matched_keywords(text: str) -> list[str]:
-    return sorted({m.lower() for m in _keyword_pattern().findall(text or "")})
+    ai = {m.lower() for m in _pattern("ai_keywords").findall(text or "")}
+    return sorted(set(data_keywords(text)) | ai)
 
 
 def now_utc() -> datetime:

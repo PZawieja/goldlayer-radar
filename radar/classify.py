@@ -30,15 +30,22 @@ def _system() -> str:
         for k, v in config("taxonomy")["categories"].items()
     )
     return (
-        "You classify items from Hacker News, Reddit, GitHub, Hugging Face papers, "
-        "Bluesky and vendor/expert RSS feeds for a trend radar used by an analytics "
-        "engineering blog. The audience: analytics engineers, data engineers, and "
-        "people applying AI/LLMs to data work.\n\nCategories:\n"
-        f"{cats}\n\n"
-        "Rules: mark is_relevant=false for spam, star-farmed or unrelated repos, "
-        "consumer AI gossip, and homonyms (e.g. DBT = dialectical behavior therapy). "
-        "primary_tag must follow the category's site tag unless the item clearly "
-        "fits another. Reuse common topic_key wording so similar items share a key."
+        "You classify items for the trend radar of goldlayer.dev, a practical blog "
+        "for analytics engineers. Its lane: dbt modeling and testing, SQL, "
+        "Snowflake (and other warehouses), semantic layers and metrics, data "
+        "quality, and AI agents that work on top of governed warehouse data "
+        "(analytics agents, text-to-SQL, MCP servers for data, evals for them).\n\n"
+        f"Categories:\n{cats}\n\n"
+        "is_relevant=true ONLY if an analytics engineer could apply it in their "
+        "warehouse, dbt project, SQL, BI layer, data tests, or an AI agent working "
+        "on their data. Mark is_relevant=false for: general model releases and "
+        "benchmarks, coding agents or MCP servers unrelated to data, consumer AI, "
+        "ML research without a data-stack application, career/opinion posts with "
+        "no technique, spam or star-farmed repos, and homonyms (e.g. DBT = "
+        "dialectical behavior therapy). Irrelevant items use category 'other' and "
+        "primary_tag 'none'. primary_tag follows the category's site tag unless "
+        "the item clearly fits another (e.g. Snowflake Cortex -> Snowflake). Reuse "
+        "common topic_key wording so similar items share a key."
     )
 
 

@@ -4,7 +4,7 @@ from typing import Literal
 import anthropic
 import duckdb
 import pyarrow as pa
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from radar.common import DATA, ROOT, config
 
@@ -50,10 +50,10 @@ class ClusterResult(Strict):
 
 
 class TopicScore(Strict):
-    audience_relevance: int = Field(ge=0, le=10)
-    practical_applicability: int = Field(ge=0, le=10)
-    durability: int = Field(ge=0, le=10)
-    gap: int = Field(ge=0, le=10)
+    audience_relevance: int = Field(description="0-10")
+    practical_applicability: int = Field(description="0-10")
+    durability: int = Field(description="0-10")
+    gap: int = Field(description="0-10")
     covered_by: str = Field(description="Existing post/backlog title or ''")
     verdict: Literal["Write now", "Watch", "Skip"]
     why_it_matters: str
@@ -62,9 +62,16 @@ class TopicScore(Strict):
     post_angle: str
     post_format: Literal["tutorial", "build log", "comparison", "opinion", "explainer"]
     example_scenario: str = Field(description="Fictional, non-German, non-retail")
-    titles: list[str] = Field(min_length=2, max_length=3)
+    titles: list[str] = Field(description="2-3 alternatives")
     linkedin_hook: str
     primary_sources: list[str] = Field(description="URLs copied from the evidence")
+
+    @model_validator(mode="after")
+    def clamp(self):
+        for f in ("audience_relevance", "practical_applicability", "durability", "gap"):
+            setattr(self, f, max(0, min(10, getattr(self, f))))
+        self.titles = self.titles[:3]
+        return self
 
 
 def json_schema(model: type[BaseModel]) -> dict:
