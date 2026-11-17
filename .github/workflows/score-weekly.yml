@@ -44,7 +44,7 @@ jobs:
             '      threads: 4' > dbt/profiles.yml
       - name: Build base models
         working-directory: dbt
-        run: uv run dbt build --profiles-dir . --select +int_items
+        run: uv run dbt build --profiles-dir . --select +int_items stg_llm__classified_items stg_llm__topic_clusters
       - name: Classify new items (Haiku, Batches API)
         run: uv run python -m radar.classify --timeout 7200
       - name: Cluster topic keys (Sonnet)
