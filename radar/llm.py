@@ -63,6 +63,10 @@ class TopicScore(Strict):
     post_format: Literal["tutorial", "build log", "comparison", "opinion", "explainer"]
     example_scenario: str = Field(description="Fictional, non-German, non-retail")
     titles: list[str] = Field(description="2-3 alternatives")
+    series_parts: list[str] = Field(
+        description="2-5 short part titles if the topic needs a series, else []"
+    )
+    visual_idea: str = Field(description="The one diagram that makes it click")
     linkedin_hook: str
     primary_sources: list[str] = Field(description="URLs copied from the evidence")
 
@@ -71,6 +75,7 @@ class TopicScore(Strict):
         for f in ("audience_relevance", "practical_applicability", "durability", "gap"):
             setattr(self, f, max(0, min(10, getattr(self, f))))
         self.titles = self.titles[:3]
+        self.series_parts = self.series_parts[:5]
         return self
 
 

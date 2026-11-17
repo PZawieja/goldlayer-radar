@@ -8,7 +8,7 @@ weekly  dbt (int_items) ─► classify.py (Haiku, Batches) ─► cluster.py (S
         ─► dbt (fct_topic_weekly_scores) ─► score.py (Sonnet) ─► notion_sync.py
 ```
 
-**Sources:** vendor and expert RSS (dbt, Snowflake, BigQuery, Databricks, DuckDB, SELECT, Monte Carlo, Medium tags), dbt Community Discourse, DEV.to, GitHub (data-focused repo searches with star velocity), Hacker News, Lobsters, Bluesky, Hugging Face papers, PyPI downloads, and Reddit once API access is granted. Every item must mention a data/SQL/warehouse term; generic AI news is filtered out at collection.
+**Sources:** vendor and expert RSS (dbt, Snowflake, BigQuery, Databricks, DuckDB, SELECT, Monte Carlo, Medium tags), dbt Community Discourse, DEV.to, GitHub (data-focused repo searches with star velocity), Hacker News, Lobsters, Bluesky, Hugging Face papers, and PyPI downloads. Reddit is not used: it no longer grants API access to third-party collectors. Every item must mention a data/SQL/warehouse term; generic AI news is filtered out at collection.
 
 **Score (0–100):** momentum 25 · cross-source spread 15 · audience relevance 20 · practical applicability 20 · coverage gap 10 · durability 10. The first two come from dbt; the rest are judged by an LLM against the site's [post-writing guide](https://github.com/PZawieja/piotr-zawieja-site/blob/main/POST_WRITING_GUIDE.md). A topic with no primary source (docs, release notes, paper, repo) cannot get "Write now".
 
@@ -35,6 +35,6 @@ Every LLM step has `--dry-run`. dbt must run from `dbt/` because source paths ar
 
 1. Create a Notion internal integration, share a parent page with it, then:
    `NOTION_TOKEN=... uv run python -m radar.notion_sync --setup <parent_page_id>`
-2. Add repo secrets: `ANTHROPIC_API_KEY`, `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID`, and optionally `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET` (Reddit returns 403 without OAuth).
+2. Add repo secrets: `ANTHROPIC_API_KEY`, `NOTION_TOKEN`, `NOTION_DATA_SOURCE_ID`.
 
 Config lives in `config/`: sources, taxonomy, scoring weights, and the editorial rubric.

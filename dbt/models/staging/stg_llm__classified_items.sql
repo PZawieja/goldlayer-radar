@@ -1,7 +1,8 @@
 SELECT
     item_id
     , is_relevant
-    , category
+    -- renamed in the taxonomy; older classifications keep the old key
+    , REPLACE(category, 'warehouse_other', 'warehouse_features') AS category
     , primary_tag
     , item_type
     , source_kind

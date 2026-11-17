@@ -8,11 +8,6 @@ models:
         tests: [not_null]
       - name: snapshot_date
         tests: [not_null]
-  - name: stg_reddit__posts
-    description: Top daily Reddit posts from configured subreddits.
-    columns:
-      - name: item_id
-        tests: [not_null]
   - name: stg_github__repo_snapshots
     description: Star/fork snapshot of new GitHub repos found by topic search.
     columns:

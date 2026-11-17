@@ -17,22 +17,6 @@ WITH unioned AS (
 
     SELECT
         item_id
-        , 'reddit' AS source
-        , snapshot_date
-        , title
-        , selftext AS body
-        , permalink AS url
-        , 'secondary' AS source_kind
-        , score AS engagement
-        , num_comments AS comments
-        , published_at
-        , matched_keywords
-    FROM {{ ref('stg_reddit__posts') }}
-
-    UNION ALL
-
-    SELECT
-        item_id
         , 'github' AS source
         , snapshot_date
         , full_name AS title

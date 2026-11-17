@@ -7,9 +7,6 @@ sources:
       - name: hn
         meta:
           external_location: "read_parquet('../data/raw/*/hn.parquet', filename = true, union_by_name = true)"
-      - name: reddit
-        meta:
-          external_location: "read_parquet('../data/raw/*/reddit.parquet', filename = true, union_by_name = true)"
       - name: github
         meta:
           external_location: "read_parquet('../data/raw/*/github.parquet', filename = true, union_by_name = true)"

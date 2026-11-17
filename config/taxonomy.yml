@@ -1,20 +1,28 @@
 categories:
-  analytics_agents: {label: "Analytics agents & text-to-SQL", tag: AI}
+  analytics_agents: {label: "Building analytics agents & text-to-SQL", tag: AI}
   agents_mcp_data: {label: "Agents & MCP for data", tag: AI}
   agent_evals: {label: "Evals & trust for analytics agents", tag: AI}
-  ai_for_ae: {label: "AI-assisted analytics engineering", tag: AI}
+  context_engineering: {label: "Context engineering for data agents", tag: AI}
+  model_choice_ai_cost: {label: "Choosing LLMs & AI cost for data work", tag: AI}
+  ai_for_ae: {label: "LLMs in the AE workflow (IDE / pipeline dev / review)", tag: AI}
+  chat_integrations: {label: "Data bots in Slack & Teams", tag: AI}
+  llm_use_cases: {label: "Real company LLM use cases on data", tag: AI}
   ai_data_platforms: {label: "AI in data platforms (Cortex / Genie / BigQuery)", tag: AI}
   semantic_layer: {label: "Semantic layer & metrics", tag: dbt}
-  dbt_patterns: {label: "dbt & modeling patterns", tag: dbt}
+  dbt_patterns: {label: "dbt best practices & modeling patterns", tag: dbt}
+  dbt_at_scale: {label: "dbt at scale (incremental / thousands of models)", tag: dbt}
+  ci_cd_git: {label: "CI/CD & git for data teams (slim CI / branching)", tag: dbt}
   sql_patterns: {label: "SQL patterns & performance", tag: dbt}
-  transformation_tools: {label: "Transformation & ingestion tools", tag: dbt}
+  transformation_tools: {label: "New tools for AEs (transform / ingest / IDE)", tag: dbt}
   snowflake: {label: "Snowflake features & practice", tag: Snowflake}
-  warehouse_cost: {label: "Warehouse cost & performance", tag: Snowflake}
-  warehouse_other: {label: "BigQuery / Databricks / DuckDB / lakehouse", tag: new-tag-candidate}
+  warehouse_features: {label: "New warehouse functions (BigQuery / Databricks / DuckDB)", tag: new-tag-candidate}
+  warehouse_cost: {label: "Warehouse cost optimisation", tag: Snowflake}
+  pipeline_reliability: {label: "Self-healing pipelines & alerting", tag: data-quality}
   data_quality: {label: "Data quality / tests / contracts", tag: data-quality}
   observability: {label: "Observability / lineage / governance", tag: data-quality}
+  team_and_skills: {label: "Data team structure & AE skills", tag: new-tag-candidate}
   orchestration: {label: "Orchestration & platform ops", tag: new-tag-candidate}
   other: {label: "Other / off-topic", tag: none}
 
 site_tags: [AI, dbt, Snowflake, data-quality]
-item_types: [release, tool, technique, debate, case_study, research, news]
+item_types: [release, tool, technique, best_practice, debate, case_study, research, news]

@@ -13,10 +13,6 @@ QUERIES = {
         "SELECT title, url, points FROM '{f}' WHERE points >= ? AND len(matched_keywords) > 0",
         "hn_points",
     ),
-    "reddit": (
-        "SELECT title, permalink, score FROM '{f}' WHERE score >= ? AND len(matched_keywords) > 0",
-        "reddit_score",
-    ),
 }
 
 

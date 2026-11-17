@@ -26,6 +26,8 @@ TEXTS = [
     "Example scenario",
     "Suggested titles",
     "LinkedIn hook",
+    "Series plan",
+    "Visual idea",
     "Covered by",
     "Primary sources",
     "Other evidence",
@@ -129,6 +131,7 @@ def properties(r: dict) -> dict:
         "Post angle": "post_angle",
         "Example scenario": "example_scenario",
         "LinkedIn hook": "linkedin_hook",
+        "Visual idea": "visual_idea",
         "Covered by": "covered_by",
     }
     for prop, key in optional.items():
@@ -136,14 +139,28 @@ def properties(r: dict) -> dict:
             props[prop] = text(r[key])
     if r.get("titles"):
         props["Suggested titles"] = text("\n".join(r["titles"]))
+    if r.get("series_parts"):
+        parts = r["series_parts"]
+        props["Series plan"] = text(
+            "\n".join(f"{i}. {t}" for i, t in enumerate(parts, 1))
+        )
     if r.get("post_format"):
         props["Format"] = {"select": {"name": opt(r["post_format"])}}
     return props
 
 
+def ensure_schema(client: Client, ds_id: str):
+    have = client.data_sources.retrieve(ds_id)["properties"]
+    missing = {k: v for k, v in schema().items() if k not in have}
+    if missing:
+        client.data_sources.update(ds_id, properties=missing)
+        log.info("notion: added properties %s", sorted(missing))
+
+
 def sync(rows: list[dict]) -> tuple[int, int]:
     client = notion()
     ds_id = os.environ["NOTION_DATA_SOURCE_ID"]
+    ensure_schema(client, ds_id)
     pages = existing_pages(client, ds_id)
     penalty = config("scoring")["covered_penalty"]
     created = updated = 0

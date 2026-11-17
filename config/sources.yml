@@ -45,6 +45,18 @@ data_keywords:
   - power bi
   - metabase
   - spreadsheet
+  - dataform
+  - data stack
+  - data platform
+  - data team
+  - data teams
+  - analytics team
+  - incremental model
+  - slim ci
+  - self-healing
+  - data incident
+  - data alert
+  - data product
 
 ai_keywords:
   - llm
@@ -68,19 +80,6 @@ hn:
   lookback_hours: 72
   hits_per_query: 50
 
-reddit:
-  subreddits:
-    - dataengineering
-    - dbt
-    - snowflake
-    - analytics
-    - SQL
-    - BusinessIntelligence
-    - ClaudeAI
-  gated_subreddits:
-    - ClaudeAI
-  min_score: 20
-  limit: 50
 
 github:
   queries:
@@ -181,3 +180,12 @@ rss:
   - {name: Medium Snowflake, url: "https://medium.com/feed/tag/snowflake", kind: secondary, require_data_keyword: true}
   - {name: Medium text-to-SQL, url: "https://medium.com/feed/tag/text-to-sql", kind: secondary}
   - {name: Medium data engineering, url: "https://medium.com/feed/tag/data-engineering", kind: secondary, require_data_keyword: true}
+  - {name: Data Engineer Things, url: "https://blog.dataengineerthings.org/feed", kind: secondary}
+  - {name: Seattle Data Guy, url: "https://seattledataguy.substack.com/feed", kind: secondary}
+  - {name: Data Engineering Central, url: "https://dataengineeringcentral.substack.com/feed", kind: secondary}
+  - {name: Simon Spati, url: "https://www.ssp.sh/index.xml", kind: secondary}
+  - {name: Claude blog, url: "https://claude.com/blog/rss.xml", kind: primary, require_data_keyword: true}
+  - {name: Medium BigQuery, url: "https://medium.com/feed/tag/bigquery", kind: secondary}
+  - {name: Medium data team, url: "https://medium.com/feed/tag/data-team", kind: secondary, require_data_keyword: true}
+  - {name: Medium data pipeline, url: "https://medium.com/feed/tag/data-pipeline", kind: secondary, require_data_keyword: true}
+  - {name: Medium LLMOps, url: "https://medium.com/feed/tag/llmops", kind: secondary, require_data_keyword: true}

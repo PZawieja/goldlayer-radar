@@ -9,7 +9,6 @@ from radar.common import log, write_parquet
 
 SOURCES = [
     "hn",
-    "reddit",
     "github",
     "pypi",
     "hf_papers",
