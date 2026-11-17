@@ -34,10 +34,15 @@ NUMBERS = ["Score", "Momentum", "Sources", "Items"]
 DATES = ["Week", "Checked on"]
 
 
+def opt(name: str) -> str:
+    return name.replace(",", " /")[:100]
+
+
 def schema() -> dict:
     props = {"Topic": {"title": {}}}
     props |= {
-        k: {"select": {"options": [{"name": n} for n in v]}} for k, v in SELECTS.items()
+        k: {"select": {"options": [{"name": opt(n)} for n in v]}}
+        for k, v in SELECTS.items()
     }
     props |= {k: {"rich_text": {}} for k in TEXTS}
     props |= {k: {"number": {}} for k in NUMBERS}
@@ -96,8 +101,8 @@ def properties(r: dict) -> dict:
         "Topic": {"title": [{"text": {"content": r["cluster_label"][:200]}}]},
         "Topic Key": text(r["cluster_key"]),
         "Score": {"number": r["score"]},
-        "Verdict": {"select": {"name": r["verdict"]}},
-        "Primary tag": {"select": {"name": r["primary_tag"] or "none"}},
+        "Verdict": {"select": {"name": opt(r["verdict"])}},
+        "Primary tag": {"select": {"name": opt(r["primary_tag"] or "none")}},
         "Category": {
             "select": {
                 "name": cat_labels.get(r["category"], {}).get(
@@ -105,7 +110,7 @@ def properties(r: dict) -> dict:
                 )
             }
         },
-        "Type": {"select": {"name": r["item_type"]}}
+        "Type": {"select": {"name": opt(r["item_type"])}}
         if r.get("item_type")
         else {"select": None},
         "Momentum": {"number": r.get("momentum_norm")},
@@ -132,7 +137,7 @@ def properties(r: dict) -> dict:
     if r.get("titles"):
         props["Suggested titles"] = text("\n".join(r["titles"]))
     if r.get("post_format"):
-        props["Format"] = {"select": {"name": r["post_format"]}}
+        props["Format"] = {"select": {"name": opt(r["post_format"])}}
     return props
 
 
