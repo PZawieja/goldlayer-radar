@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_hn__items
+    description: Hacker News stories per daily snapshot (Algolia API).
+    columns:
+      - name: item_id
+        tests: [not_null]
+      - name: snapshot_date
+        tests: [not_null]
+  - name: stg_reddit__posts
+    description: Top daily Reddit posts from configured subreddits.
+    columns:
+      - name: item_id
+        tests: [not_null]
+  - name: stg_github__repo_snapshots
+    description: Star/fork snapshot of new GitHub repos found by topic search.
+    columns:
+      - name: item_id
+        tests: [not_null]
+      - name: stars
+        tests: [not_null]
+  - name: stg_pypi__downloads
+    description: Recent PyPI download counts per tracked package (pypistats).
+    columns:
+      - name: package_snapshot_id
+        tests: [not_null, unique]
+  - name: stg_hf__papers
+    description: Hugging Face daily papers above the upvote threshold.
+    columns:
+      - name: item_id
+        tests: [not_null]
+  - name: stg_bluesky__posts
+    description: Top Bluesky posts for configured search queries.
+    columns:
+      - name: item_id
+        tests: [not_null]
+  - name: stg_rss__entries
+    description: Recent entries from vendor and expert RSS feeds.
+    columns:
+      - name: item_id
+        tests: [not_null]
+      - name: source_kind
+        tests:
+          - accepted_values:
+              arguments:
+                values: [primary, secondary]
+  - name: stg_llm__classified_items
+    description: Latest LLM classification per item.
+    columns:
+      - name: item_id
+        tests: [not_null, unique]
+      - name: source_kind
+        tests:
+          - accepted_values:
+              arguments:
+                values: [primary, secondary]
+  - name: stg_llm__topic_clusters
+    description: LLM mapping of raw topic keys to merged clusters.
+    columns:
+      - name: topic_key
+        tests: [not_null, unique]
+      - name: cluster_key
+        tests: [not_null]

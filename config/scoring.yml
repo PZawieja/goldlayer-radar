@@ -1,0 +1,17 @@
+weights:
+  momentum: 25
+  spread: 15
+  audience_relevance: 20
+  practical_applicability: 20
+  gap: 10
+  durability: 10
+
+top_clusters_to_score: 25
+min_cluster_items: 1
+covered_penalty: 0.5
+no_primary_source_verdict_cap: Watch
+
+breaking:
+  hn_points: 300
+  reddit_score: 500
+  github_stars_per_day: 300

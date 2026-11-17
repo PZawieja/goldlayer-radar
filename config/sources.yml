@@ -1,0 +1,126 @@
+keywords:
+  - dbt
+  - duckdb
+  - motherduck
+  - snowflake
+  - databricks
+  - bigquery
+  - iceberg
+  - delta lake
+  - data engineering
+  - analytics engineering
+  - data pipeline
+  - data warehouse
+  - lakehouse
+  - semantic layer
+  - data quality
+  - data contract
+  - observability
+  - sqlmesh
+  - dlt
+  - polars
+  - airflow
+  - dagster
+  - text-to-sql
+  - mcp
+  - model context protocol
+  - llm
+  - llms
+  - ai
+  - agents
+  - coding agent
+  - sql
+  - postgres
+  - embeddings
+  - ai agent
+  - agentic
+  - rag
+  - evals
+  - claude
+  - openai
+  - anthropic
+  - gemini
+  - vector database
+
+hn:
+  min_points: 20
+  lookback_hours: 48
+  hits_per_query: 50
+
+reddit:
+  subreddits:
+    - dataengineering
+    - dbt
+    - snowflake
+    - analytics
+    - LocalLLaMA
+    - ClaudeAI
+    - MachineLearning
+  min_score: 20
+  limit: 50
+
+github:
+  topics:
+    - llm
+    - mcp
+    - ai-agents
+    - dbt
+    - duckdb
+    - data-engineering
+    - iceberg
+    - text-to-sql
+    - data-quality
+  created_within_days: 30
+  min_stars: 50
+  per_topic: 30
+
+pypi:
+  packages:
+    - dbt-core
+    - dbt-duckdb
+    - duckdb
+    - sqlmesh
+    - dlt
+    - polars
+    - mcp
+    - anthropic
+    - openai
+    - langgraph
+    - pydantic-ai
+    - great-expectations
+    - soda-core
+    - dagster
+    - apache-airflow
+    - pyiceberg
+
+hf_papers:
+  limit: 50
+  min_upvotes: 10
+
+bluesky:
+  queries:
+    - dbt-core
+    - dbt model
+    - duckdb
+    - analytics engineering
+    - data engineering
+    - semantic layer
+    - mcp server
+    - text-to-sql
+  limit: 25
+  min_likes: 10
+
+rss:
+  - {name: dbt Labs, url: "https://www.getdbt.com/blog/rss.xml", kind: primary}
+  - {name: DuckDB, url: "https://duckdb.org/feed.xml", kind: primary}
+  - {name: MotherDuck, url: "https://motherduck.com/rss.xml", kind: primary}
+  - {name: Snowflake Engineering, url: "https://medium.com/feed/snowflake", kind: primary}
+  - {name: Databricks, url: "https://www.databricks.com/feed", kind: primary}
+  - {name: OpenAI, url: "https://openai.com/news/rss.xml", kind: primary}
+  - {name: Hugging Face, url: "https://huggingface.co/blog/feed.xml", kind: primary}
+  - {name: Simon Willison, url: "https://simonwillison.net/atom/everything/", kind: secondary}
+  - {name: Data Engineering Weekly, url: "https://www.dataengineeringweekly.com/feed", kind: secondary}
+  - {name: Benn Stancil, url: "https://benn.substack.com/feed", kind: secondary}
+  - {name: Latent Space, url: "https://www.latent.space/feed", kind: secondary}
+  - {name: Seattle Data Guy, url: "https://seattledataguy.substack.com/feed", kind: secondary}
+  - {name: Pragmatic Engineer, url: "https://newsletter.pragmaticengineer.com/feed", kind: secondary}

@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: int_item_snapshots
+    description: All sources unioned to one row per item per snapshot day.
+    columns:
+      - name: item_snapshot_id
+        tests: [not_null, unique]
+      - name: source
+        tests:
+          - accepted_values:
+              arguments:
+                values: [hn, reddit, github, hf_papers, bluesky, rss]
+  - name: int_items
+    description: One row per item with latest attributes, velocity and within-source engagement percentile.
+    columns:
+      - name: item_id
+        tests: [not_null, unique]
+      - name: engagement_pct
+        tests: [not_null]
+  - name: int_topic_weekly_activity
+    description: Relevant classified items rolled up to cluster x week.
+    columns:
+      - name: cluster_week_id
+        tests: [not_null, unique]

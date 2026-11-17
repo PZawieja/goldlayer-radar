@@ -1,0 +1,25 @@
+[project]
+name = "goldlayer-radar"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=2.9.0",
+    "dbt-duckdb>=1.11.1",
+    "duckdb>=2.0.0",
+    "feedparser>=6.0.14",
+    "httpx>=0.28.1",
+    "notion-client>=3.1.0",
+    "pyarrow>=26.0.1",
+    "pydantic>=2.14.3",
+    "pyyaml>=6.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.5",
+    "sqlfluff>=4.5.0",
+]
+
+[tool.ruff]
+line-length = 88

@@ -1,0 +1,20 @@
+categories:
+  agents_mcp: {label: "Agents & MCP", tag: AI}
+  llm_evals: {label: "LLM evals & judges", tag: AI}
+  ai_coding: {label: "AI coding tools for data", tag: AI}
+  text_to_sql: {label: "Text-to-SQL & analytics agents", tag: AI}
+  llm_platform: {label: "Model & platform releases", tag: AI}
+  semantic_layer: {label: "Semantic layer & metrics", tag: dbt}
+  dbt_patterns: {label: "dbt & modeling patterns", tag: dbt}
+  transformation_tools: {label: "Transformation tools (dbt, SQLMesh, dlt)", tag: dbt}
+  orchestration: {label: "Orchestration", tag: new-tag-candidate}
+  lakehouse: {label: "Lakehouse, Iceberg & table formats", tag: new-tag-candidate}
+  duckdb_local: {label: "DuckDB & local-first analytics", tag: new-tag-candidate}
+  warehouse_platform: {label: "Snowflake & cloud warehouses", tag: Snowflake}
+  warehouse_cost: {label: "Warehouse cost & performance", tag: Snowflake}
+  data_quality: {label: "Data quality, contracts & observability", tag: data-quality}
+  governance: {label: "Governance, lineage & catalogs", tag: data-quality}
+  other: {label: "Other / off-topic", tag: none}
+
+site_tags: [AI, dbt, Snowflake, data-quality]
+item_types: [release, tool, technique, debate, case_study, research, news]

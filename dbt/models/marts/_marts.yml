@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_items
+    description: Item-grain fact with engagement metrics and LLM classification.
+    columns:
+      - name: item_id
+        tests: [not_null, unique]
+  - name: dim_topics
+    description: Merged topic clusters.
+    columns:
+      - name: cluster_key
+        tests: [not_null, unique]
+  - name: fct_topic_weekly_scores
+    description: Quantitative weekly signals per topic cluster; input to LLM scoring and Notion sync.
+    columns:
+      - name: cluster_week_id
+        tests: [not_null, unique]
+      - name: cluster_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_topics')
+                field: cluster_key
+      - name: momentum_norm
+        tests: [not_null]
+  - name: fct_package_adoption
+    description: PyPI download run-rates per tracked package and snapshot.
+    columns:
+      - name: package_snapshot_id
+        tests: [not_null, unique]

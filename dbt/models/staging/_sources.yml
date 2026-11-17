@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Daily API snapshots written by radar/collect.py, one parquet per source per day.
+    tables:
+      - name: hn
+        meta:
+          external_location: "read_parquet('../data/raw/*/hn.parquet', filename = true, union_by_name = true)"
+      - name: reddit
+        meta:
+          external_location: "read_parquet('../data/raw/*/reddit.parquet', filename = true, union_by_name = true)"
+      - name: github
+        meta:
+          external_location: "read_parquet('../data/raw/*/github.parquet', filename = true, union_by_name = true)"
+      - name: pypi
+        meta:
+          external_location: "read_parquet('../data/raw/*/pypi.parquet', filename = true, union_by_name = true)"
+      - name: hf_papers
+        meta:
+          external_location: "read_parquet('../data/raw/*/hf_papers.parquet', filename = true, union_by_name = true)"
+      - name: bluesky
+        meta:
+          external_location: "read_parquet('../data/raw/*/bluesky.parquet', filename = true, union_by_name = true)"
+      - name: rss
+        meta:
+          external_location: "read_parquet('../data/raw/*/rss.parquet', filename = true, union_by_name = true)"
+  - name: llm
+    description: LLM outputs written by radar/classify.py and radar/cluster.py.
+    tables:
+      - name: classified_items
+        meta:
+          external_location: "read_parquet('../data/classified/items_*.parquet', union_by_name = true)"
+      - name: topic_clusters
+        meta:
+          external_location: "read_parquet('../data/classified/clusters.parquet')"

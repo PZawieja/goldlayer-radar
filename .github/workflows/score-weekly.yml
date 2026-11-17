@@ -1,0 +1,59 @@
+name: score-weekly
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "Week start (YYYY-MM-DD, Monday). Empty = last full week."
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: radar-data
+  cancel-in-progress: false
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --frozen --no-dev
+      - run: uv run python -m radar.bootstrap
+      - name: Build base models
+        working-directory: dbt
+        run: uv run dbt build --profiles-dir . --select +int_items
+      - name: Classify new items (Haiku, Batches API)
+        run: uv run python -m radar.classify --timeout 7200
+      - name: Cluster topic keys (Sonnet)
+        working-directory: dbt
+        run: |
+          uv run dbt build --profiles-dir . --select stg_llm__classified_items
+          cd .. && uv run python -m radar.cluster
+      - name: Build marts
+        working-directory: dbt
+        run: uv run dbt build --profiles-dir .
+      - name: Score clusters (Sonnet)
+        run: uv run python -m radar.score ${{ inputs.week && format('--week {0}', inputs.week) || '' }}
+      - name: Sync to Notion
+        run: |
+          latest=$(ls -t data/scored/*.json 2>/dev/null | head -1)
+          [ -n "$latest" ] && uv run python -m radar.notion_sync "$latest" || echo "nothing scored"
+      - name: Commit classifications
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/classified
+          git diff --cached --quiet || git commit -m "data: classifications $(date -u +%F)"
+          git pull --rebase && git push
